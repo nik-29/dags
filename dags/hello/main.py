@@ -34,13 +34,29 @@ executor_config_sidecar = {
         }
 
 @task(executor_config=executor_config_sidecar)
-def print_hello():
- return 'Hello Wolrd'
+def test_sharedvolume_mount():
+            """
+            Tests whether the volume has been mounted.
+            """
+            for i in range(5):
+                try:
+                    return_code = os.system("cat /shared/test.txt")
+                    if return_code != 0:
+                        raise ValueError(f"Error when checking volume mount. Return code {return_code}")
+                except ValueError as e:
+                    if i > 4:
+                        raise e
+                        
+sidecar_task = test_sharedvolume_mount()
 
-dag = DAG('hello_world', description='Hello world example', schedule_interval='0 12 * * *', start_date=datetime(2017, 3, 20), catchup=False)
 
-dummy_operator = DummyOperator(task_id='dummy_task', retries = 3, dag=dag)
+# def print_hello():
+#  return 'Hello Wolrd'
 
-hello_operator = PythonOperator(task_id='hello_task', python_callable=print_hello, dag=dag)
+# dag = DAG('hello_world', description='Hello world example', schedule_interval='0 12 * * *', start_date=datetime(2017, 3, 20), catchup=False)
 
-dummy_operator >> hello_operator
+# dummy_operator = DummyOperator(task_id='dummy_task', retries = 3, dag=dag)
+
+# hello_operator = PythonOperator(task_id='hello_task', python_callable=print_hello, dag=dag)
+
+# dummy_operator >> hello_operator
