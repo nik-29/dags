@@ -3,8 +3,15 @@ from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 import time
+import mysql.connector
 def print_hello():
- time.sleep(300)
+ #time.sleep(300)
+ mydb = mysql.connector.connect(
+  host="127.0.0.1",
+  user="root",
+  password="root"
+)
+ print(mydb)
  return 'Hello Wolrd'
 
 dag = DAG('hello_world', description='Hello world example', schedule_interval='0 12 * * *', start_date=datetime(2017, 3, 20), catchup=False)
