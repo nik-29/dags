@@ -3,7 +3,7 @@ from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 import time
-import mysql.connector
+
 def print_hello():
  #time.sleep(300)
 #  mydb = mysql.connector.connect(
