@@ -5,7 +5,7 @@ from airflow.operators.python_operator import PythonOperator
 import time
 
 def print_hello():
- #time.sleep(300)
+ time.sleep(300)
 #  mydb = mysql.connector.connect(
 #   host="127.0.0.1",
 #   user="root",
