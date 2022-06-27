@@ -12,7 +12,7 @@ def print_hello():
   password="root"
 )
  print(mydb)
- return 'Hello Wolrd'
+ return mydb
 
 dag = DAG('hello_world', description='Hello world example', schedule_interval='0 12 * * *', start_date=datetime(2017, 3, 20), catchup=False)
 
